@@ -21,7 +21,7 @@ folder_location = current_user_path + "\Documents\My Games\Path of Exile"
 
 def find_latest_filter(result):
 	soup = BeautifulSoup(result.content, "html.parser")
-	print("Found version :", soup.find("h1", class_="release-title").a.text)
+	print("Found version :", soup.find("div", class_="release-header").a.text)
 	
 	for a in soup.find_all('a', href=True):
 		if (".zip" in a["href"]):
