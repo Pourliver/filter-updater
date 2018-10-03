@@ -14,17 +14,30 @@ from bs4 import BeautifulSoup
 #You may update the following variables to specify a custom PoE filter path.
 
 current_user_path = os.environ["USERPROFILE"]
-#Default install path on Windows
 folder_location = current_user_path + "\Documents\My Games\Path of Exile"
+zip_location = folder_location + "\\temp.zip"
+created_content = []
 
-############# DON'T OVERRIDE
+def main():
+	url = "https://github.com/NeverSinkDev/NeverSink-Filter/releases/latest"
+
+	print("Neversink's itemfilter updater, made by Pourliver.")
+
+	os.chdir(folder_location)
+	result = requests.get(url)
+	download_file(find_latest_filter(result))
+	move_files(extract_files())
+	cleanup()
+
+	print("Done!")
+	os.system('pause')
 
 def find_latest_filter(result):
 	soup = BeautifulSoup(result.content, "html.parser")
 	print("Found version :", soup.find("div", class_="release-header").a.text)
 	
 	for a in soup.find_all('a', href=True):
-		if (".zip" in a["href"]):
+		if ".zip" in a["href"]:
 			return "https://github.com/" + a["href"]
 
 def download_file(url):
@@ -66,19 +79,5 @@ def cleanup():
 		else:
 			shutil.rmtree(folder)
 
-############# MAIN
-
-zip_location = folder_location + "\\temp.zip"
-url = "https://github.com/NeverSinkDev/NeverSink-Filter/releases/latest"
-created_content = []
-
-print("Neversink's itemfilter updater, made by Pourliver.")
-
-os.chdir(folder_location)
-result = requests.get(url)
-download_file(find_latest_filter(result))
-move_files(extract_files())
-cleanup()
-
-print("Done!")
-os.system('pause')
+if __name__ == "__main__":
+    main()
