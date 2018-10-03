@@ -20,6 +20,9 @@ To start the updater, double click the python file or type the following.
 
 `python update-filter.py`
 
+This would output something like this.
+
+![Example](https://i.imgur.com/Nynmce2.png "Example")
 
 You can edit the following variables to change the default filter location.
 ```python
