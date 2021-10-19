@@ -1,3 +1,7 @@
+# *** DEPRECATED ***
+
+This feature is now built-in with the *filter subscription* feature on the official website.
+
 # Filter-Updater for Path of Exile
 __ONLY TESTED ON WINDOWS, USE AT YOUR OWN RISK__
 
